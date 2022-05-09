@@ -16,4 +16,12 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+  background: '#081026',
+  Button: {
+    primary: '#2F9FF8',
+    faded: 'rgba(47, 159, 248, 0.1)'
+  },
+  Text: {
+    blue: '#2F9FF8'
+  }
 };
