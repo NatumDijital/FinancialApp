@@ -2,6 +2,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import { Button, Dimensions, StyleSheet, TouchableHighlight } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
+import News from '../components/News/News';
 import Stories from '../components/Stories/Stories';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -11,7 +12,8 @@ function MorningTitle() {
   const morningText = "Good morning Bro!";
   return (
     <View style={styles.morningContainer}>
-      <EvilIcons name='user' color={Colors.Text.blue} size={25}></EvilIcons>
+      <View style={styles.morningDot}></View>
+      {/* <EvilIcons name='user' color={Colors.Text.blue} size={25}></EvilIcons> */}
       <Text style={styles.morningText}>{morningText}</Text>
     </View>
   );
@@ -52,6 +54,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
     <View style={styles.container}>
       <TopBar></TopBar>
       <Stories></Stories>
+      <News></News>
     </View>
   );
 }
@@ -68,6 +71,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'stretch',
     justifyContent: 'space-between',
+  },
+  morningDot: {
+    width: 6,
+    height: 6,
+    marginRight: 10,
+    borderRadius: 25,
+    backgroundColor: Colors.Button.primary,
   },
   morningContainer: {
     top: 0,
