@@ -12,7 +12,7 @@ export default function NewsPage({ item }) {
                     <Text style={style.title}>{item.title}</Text>
                     <Text numberOfLines={2} style={style.message}>{item.message}</Text>
                     <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                        <Text style={style.key}>{item.key?.toUpperCase()}</Text>
+                        <Text style={style.key}>{item.share?.toUpperCase()}</Text>
                         <Text style={style.passedTime}>{item.createdTime + ' min ago'}</Text>
                     </View>
                 </View>
