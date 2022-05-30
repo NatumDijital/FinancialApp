@@ -17,11 +17,12 @@ export default function NewsPage({ item }) {
                     </View>
                 </View>
                 <View style={style.rightContainer}>
-                    <Image source={{uri: item.image}}></Image>
+                    <Image source={{uri: 'https://te-emlak365-com.cdn.vidyome.com/tebilisim/emlak365-com/uploads/2022/04/elon-musk-twitteri-satin-aldi-teslanin-126-milyar-dolari-buhar-oldu-1280x720.jpg'}}
+                    style={style.rightContainer}></Image>
                     <View style={style.bottomRightContainer}>
-                        <EvilIcons name="play" size={20}></EvilIcons>
-                        <EvilIcons name="share-google" size={20}></EvilIcons>
-                        <EvilIcons name="tag" size={20}></EvilIcons>
+                        <EvilIcons color= "#1C43E7" borderWidth="300" name="play" size={24} ></EvilIcons>
+                        <EvilIcons color= "#1C43E7" name="share-google" size={24} ></EvilIcons>
+                        <EvilIcons color= "#1C43E7" name="tag" size={24} ></EvilIcons>
                     </View>
                 </View>
             </View>
@@ -43,9 +44,12 @@ const style = StyleSheet.create({
     },
     leftContainer: {
         flex: 6,
+        marginRight: 2
     },
     rightContainer: {
         flex: 4,
+        height: 165
+       
     },
     title: {
         flex: 3,
@@ -76,9 +80,11 @@ const style = StyleSheet.create({
         fontWeight: '400',
     },
     image: {
-
+        
     },
     bottomRightContainer: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
     }
 })

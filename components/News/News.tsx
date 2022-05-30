@@ -1,4 +1,4 @@
-import { FlatList, Platform, StyleSheet, TouchableHighlight } from "react-native";
+import { FlatList, Platform, StyleSheet, TouchableHighlight, Image } from "react-native";
 import Colors from "../../constants/Colors";
 import { Text, View } from "../Themed";
 import NewsPage from "./NewsPage";
@@ -78,22 +78,25 @@ export default function News() {
                 style={styles.filterList}
                 horizontal={true}
                 data={data}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                     <TouchableHighlight style={styles.filterTextContainer}
                         onPress={() => onPress(item)}
                         underlayColor={Colors.Button.primary}
                     >
-                        <Text style={[styles.filterText, item.selected ? {color: 'white'} : {}]}>{item.key}</Text>
+                        <Text style={[styles.filterText, item.selected ? { color: 'white' } : {}]}>{item.key}</Text>
                     </TouchableHighlight>
                 )}
             />
             <FlatList
                 style={styles.newsContainer}
                 data={news}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                     <NewsPage item={item}></NewsPage>
                 )}
             />
+            <Image source={{
+                uri: 'https://te-emlak365-com.cdn.vidyome.com/tebilisim/emlak365-com/uploads/2022/04/elon-musk-twitteri-satin-aldi-teslanin-126-milyar-dolari-buhar-oldu-1280x720.jpg'}} 
+                style = {styles.imagesContainer}/>
         </View>
     );
 }
@@ -130,7 +133,10 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
     },
     newsContainer: {
-
+    
+    },
+    imagesContainer: {
+        
     }
 
 });
