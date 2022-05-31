@@ -94,9 +94,6 @@ export default function News() {
                     <NewsPage item={item}></NewsPage>
                 )}
             />
-            <Image source={{
-                uri: 'https://te-emlak365-com.cdn.vidyome.com/tebilisim/emlak365-com/uploads/2022/04/elon-musk-twitteri-satin-aldi-teslanin-126-milyar-dolari-buhar-oldu-1280x720.jpg'}} 
-                style = {styles.imagesContainer}/>
         </View>
     );
 }
