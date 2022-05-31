@@ -21,9 +21,9 @@ export default function NewsPage({ item }) {
                     <Image source={{ uri: item.image }}
                         style={style.rightContainer}></Image>
                     <View style={style.bottomRightContainer}>
-                        <EvilIcons name="play" style={style.EvilIcons} color = {Colors.Icon.darkBlue}></EvilIcons>
-                        <EvilIcons name="share-google" style={style.EvilIcons} color = {Colors.Icon.darkBlue}></EvilIcons>
-                        <EvilIcons name="tag" style={style.EvilIcons} color = {Colors.Icon.darkBlue}></EvilIcons>
+                        <EvilIcons name="play" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
+                        <EvilIcons name="share-google" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
+                        <EvilIcons name="tag" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
                     </View>
                 </View>
             </View>
