@@ -11,18 +11,18 @@ export default function NewsPage({ item }) {
                 <View style={style.leftContainer}>
                     <Text style={style.title}>{item.title}</Text>
                     <Text numberOfLines={2} style={style.message}>{item.message}</Text>
-                    <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', alignItems: 'flex-end' }}>
                         <Text style={style.key}>{item.share?.toUpperCase()}</Text>
                         <Text style={style.passedTime}>{item.createdTime + ' min ago'}</Text>
                     </View>
                 </View>
                 <View style={style.rightContainer}>
-                    <Image source={{uri: 'https://te-emlak365-com.cdn.vidyome.com/tebilisim/emlak365-com/uploads/2022/04/elon-musk-twitteri-satin-aldi-teslanin-126-milyar-dolari-buhar-oldu-1280x720.jpg'}}
-                    style={style.rightContainer}></Image>
+                    <Image source={{ uri: item.image }}
+                        style={style.rightContainer}></Image>
                     <View style={style.bottomRightContainer}>
-                        <EvilIcons color= "#1C43E7" borderWidth="300" name="play" size={24} ></EvilIcons>
-                        <EvilIcons color= "#1C43E7" name="share-google" size={24} ></EvilIcons>
-                        <EvilIcons color= "#1C43E7" name="tag" size={24} ></EvilIcons>
+                        <EvilIcons name="play" style={style.EvilIcons} ></EvilIcons>
+                        <EvilIcons name="share-google" style={style.EvilIcons}></EvilIcons>
+                        <EvilIcons name="tag" style={style.EvilIcons}></EvilIcons>
                     </View>
                 </View>
             </View>
@@ -49,7 +49,7 @@ const style = StyleSheet.create({
     rightContainer: {
         flex: 4,
         height: 165
-       
+
     },
     title: {
         flex: 3,
@@ -80,11 +80,14 @@ const style = StyleSheet.create({
         fontWeight: '400',
     },
     image: {
-        
+
     },
     bottomRightContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        padding: 10
+        padding: 10,
+    },
+    EvilIcons: {
+        fontSize: 24
     }
 })
