@@ -23,5 +23,8 @@ export default {
   },
   Text: {
     blue: '#2F9FF8'
+  },
+  Icon: {
+    darkBlue: '#0F33CD'
   }
 };

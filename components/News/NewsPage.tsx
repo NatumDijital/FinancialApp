@@ -3,6 +3,7 @@ import { Image, StyleSheet, TouchableHighlight } from "react-native";
 import Colors from "../../constants/Colors";
 import { Text, View } from "../Themed";
 
+
 export default function NewsPage({ item }) {
     return (
         <TouchableHighlight
@@ -11,17 +12,18 @@ export default function NewsPage({ item }) {
                 <View style={style.leftContainer}>
                     <Text style={style.title}>{item.title}</Text>
                     <Text numberOfLines={2} style={style.message}>{item.message}</Text>
-                    <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', alignItems: 'flex-end'}}>
+                    <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', alignItems: 'flex-end' }}>
                         <Text style={style.key}>{item.share?.toUpperCase()}</Text>
                         <Text style={style.passedTime}>{item.createdTime + ' min ago'}</Text>
                     </View>
                 </View>
                 <View style={style.rightContainer}>
-                    <Image source={{uri: item.image}}></Image>
+                    <Image source={{ uri: item.image }}
+                        style={style.rightContainer}></Image>
                     <View style={style.bottomRightContainer}>
-                        <EvilIcons name="play" size={20}></EvilIcons>
-                        <EvilIcons name="share-google" size={20}></EvilIcons>
-                        <EvilIcons name="tag" size={20}></EvilIcons>
+                        <EvilIcons name="play" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
+                        <EvilIcons name="share-google" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
+                        <EvilIcons name="tag" style={style.EvilIcons} color={Colors.Icon.darkBlue}></EvilIcons>
                     </View>
                 </View>
             </View>
@@ -43,9 +45,12 @@ const style = StyleSheet.create({
     },
     leftContainer: {
         flex: 6,
+        marginRight: 2
     },
     rightContainer: {
         flex: 4,
+        height: 165
+
     },
     title: {
         flex: 3,
@@ -80,5 +85,10 @@ const style = StyleSheet.create({
     },
     bottomRightContainer: {
         flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
+    },
+    EvilIcons: {
+        fontSize: 24
     }
 })
