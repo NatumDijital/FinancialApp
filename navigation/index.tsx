@@ -54,7 +54,7 @@ function RootNavigator() {
       </Stack.Group>
     </Stack.Navigator>
   );
-}
+};
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.

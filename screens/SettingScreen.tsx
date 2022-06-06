@@ -1,18 +1,55 @@
-import { Image, StyleSheet, Switch, Text } from 'react-native';
+import { Pressable, Image, StyleSheet, Switch, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { View } from '../components/Themed';
 import Colors from '../constants/Colors';
+import { AntDesign } from "@expo/vector-icons";
 
-export default function SettingsScreen() {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+function SettingsEditProfile({ onBackButton }: any) {
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <TouchableOpacity>
+                    <AntDesign name="left" onPress={onBackButton} style={styles.iconBackButton}></AntDesign>
+                </TouchableOpacity>
+                <Text style={styles.title}> Edit Profile </Text>
+            </View>
+            <View style={styles.changePictureContainer}>
+                <Image source={require('../assets/images/elon.jpeg')} style={styles.changePictureImage}></Image>
+                <Text style={styles.changePictureText}>Change Picture</Text>
+            </View>
+            <View style={styles.TextInputContainer}>
+                <Text style={styles.subTitle}>Username</Text>
+                <TextInput style={styles.textInputs}></TextInput>
+                <Text style={styles.subTitle}>Email</Text>
+                <TextInput style={styles.textInputs}></TextInput>
+                <Text style={styles.subTitle}>Phone Number</Text>
+                <TextInput style={styles.textInputs}></TextInput>
+                <Text style={styles.subTitle}>User ID</Text>
+                <TextInput style={styles.textInputs}></TextInput>
+            </View>
+            <View style={styles.buttonContainer}>
+                <Pressable style={styles.upDateProfileButton}>
+                    <Text style={styles.buttonText}>Update Profile</Text>
+                </Pressable>
+            </View>
+
+        </View>
+
+    )
+}
+
+function SettingsMainPage({ onPress }: any) {
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Settings</Text>
             <View style={styles.profileNameContainer}>
                 <Image source={require('../assets/images/elon.jpeg')} style={styles.profileImage}></Image>
                 <Text style={styles.profileName}>Yigit Celik</Text>
-                <Image source={require('../assets/images/edit-profile.png')} style={styles.editImage}></Image>
+                <TouchableOpacity onPress={onPress}>
+                    <Image source={require('../assets/images/edit-profile.png')} style={styles.editImage}></Image>
+                </TouchableOpacity>
             </View>
             <View style={styles.line}></View>
             <View style={styles.signUpContainer}>
@@ -30,11 +67,7 @@ export default function SettingsScreen() {
                 </View>
                 <View style={styles.horizontalContainer}>
                     <Text style={styles.subTitle}>Daily Brief</Text>
-                    <Switch
-                        trackColor={{ false: "#202020", true: "#2F9FF8" }}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}>
-                    </Switch>
+                    <Switch trackColor={{ false: "#202020", true: "#2F9FF8" }} />
                 </View>
                 <View style={styles.horizontalContainer}>
                     <Text style={styles.subTitle}>Daily Brief Time</Text>
@@ -61,8 +94,24 @@ export default function SettingsScreen() {
                 <Image source={require('../assets/images/greater-than-sign.png')} style={styles.editImage}></Image>
             </View>
         </View>
-    );
+    )
 }
+
+export default function SettingsScreen() {
+    const [editPageIsEnabled, setEditProfile] = useState(false);
+
+    function showEditPage() {
+        setEditProfile(true);
+    }
+
+    function onHideEditPage() {
+        setEditProfile(false);
+    }
+
+    if (editPageIsEnabled) return (<SettingsEditProfile onBackButton={onHideEditPage}></SettingsEditProfile>);
+    return (<SettingsMainPage onPress={showEditPage} />);
+};
+
 
 const styles = StyleSheet.create({
     container: {
@@ -74,8 +123,8 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: '700',
         lineHeight: 36,
-        marginLeft: 18,
         color: Colors.Text.white,
+        marginLeft: 8
     },
     profileNameContainer: {
         alignContent: 'center',
@@ -158,5 +207,71 @@ const styles = StyleSheet.create({
         width: 342,
         borderRadius: 16,
         alignItems: 'center'
+    },
+    changePictureContainer: {
+        backgroundColor: Colors.background,
+        marginTop: 20,
+        marginLeft: 5,
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    changePictureImage: {
+        borderRadius: 120,
+        width: 142,
+        height: 142,
+        overflow: "hidden",
+        marginBottom: 8,
+        borderWidth: 5,
+        borderColor: Colors.Text.white
+    },
+    changePictureText: {
+        color: Colors.Text.blue,
+        fontSize: 14,
+        fontWeight: '400',
+    },
+    TextInputContainer: {
+        flexDirection: 'column',
+        backgroundColor: Colors.background,
+        justifyContent: 'space-around',
+        marginHorizontal: 26,
+        paddingTop: 15
+    },
+    textInputs: {
+        height: 40,
+        borderWidth: 1,
+        borderColor: Colors.border.lightGrey,
+        borderRadius: 8,
+        marginBottom: 19,
+        marginTop: 6,
+        color: Colors.Text.white,
+        fontWeight: '400',
+        fontSize: 14,
+        padding: 11
+
+    },
+    buttonContainer: {
+        backgroundColor: Colors.background,
+        alignItems: 'center',
+        marginVertical: 25
+    },
+    buttonText: {
+        color: Colors.Text.white,
+        fontSize: 15,
+        fontWeight: '400'
+    },
+    upDateProfileButton: {
+        backgroundColor: Colors.updatebutton.blue,
+        padding: 10,
+        borderRadius: 4,
+    },
+    iconBackButton: {
+        color: Colors.Text.white,
+        fontSize: 25,
+        marginLeft: 10,
+    },
+    header: {
+        backgroundColor: Colors.background,
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 });

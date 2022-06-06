@@ -30,8 +30,12 @@ export default {
   },
   border: {
     grey: '#CACACA',
+    lightGrey: '#A9A9A9'
   },
   switch: {
     darkGrey: '#202020'
+  },
+  updatebutton: {
+    blue: '#0768B5'
   }
 };
