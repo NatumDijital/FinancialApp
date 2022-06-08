@@ -18,6 +18,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import SettingsScreen from '../screens/SettingScreen';
 
 const MyTheme = {
   dark: true,
@@ -53,7 +54,7 @@ function RootNavigator() {
       </Stack.Group>
     </Stack.Navigator>
   );
-}
+};
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -98,6 +99,14 @@ function BottomTabNavigator() {
         component={TabTwoScreen}
         options={{
           title: 'Tab Two',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          title: 'Settings',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

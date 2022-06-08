@@ -22,9 +22,20 @@ export default {
     faded: 'rgba(47, 159, 248, 0.1)'
   },
   Text: {
-    blue: '#2F9FF8'
+    blue: '#2F9FF8',
+    white: '#FFFFFF'
   },
   Icon: {
     darkBlue: '#0F33CD'
+  },
+  border: {
+    grey: '#CACACA',
+    lightGrey: '#A9A9A9'
+  },
+  switch: {
+    darkGrey: '#202020'
+  },
+  updatebutton: {
+    blue: '#0768B5'
   }
 };
