@@ -3,12 +3,12 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -68,48 +68,49 @@ function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
+      sceneContainerStyle={{
+      }}
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarStyle: {
+          marginRight: 17,
+          marginLeft: 17,
+          marginBottom: 25,
+          borderRadius: 100,
+          height: 56,
+          padding: 5,
+          paddingBottom: 5,
+          backgroundColor: Colors.Text.blue,
+        },
+        tabBarShowLabel: false,
         headerShown: false,
+        headerTransparent: true,
       }}>
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          tabBarIcon: ({ color, focused }) =>
+            <TabBarIcon name="home" color={Colors.Text.white} focused={focused} />
         })}
       />
       <BottomTab.Screen
         name="TabTwo"
         component={TabTwoScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <TabBarIcon name="bookmark" color={Colors.Text.white} focused={focused} />,
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <TabBarIcon name="settings" color={Colors.Text.white} focused={focused} />,
           title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
+
     </BottomTab.Navigator>
   );
 }
@@ -118,8 +119,31 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof Feather>['name'];
   color: string;
+  focused: boolean,
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+  const focus = props.focused;
+  // TODO: add bottom icon if focused on
+  if (focus) {
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <Feather size={24} style={{ marginBottom: -3 }} {...props} />
+        <View style={
+          {
+            width: 5,
+            height: 5,
+            borderRadius: 5,
+            backgroundColor: Colors.Text.white,
+            position: "absolute",
+            bottom: -9.5
+          }
+        }></View>
+      </View>
+    )
+  }
+  return (
+    <Feather size={24} style={{ marginBottom: -3 }} {...props} />
+  );
+};
+
