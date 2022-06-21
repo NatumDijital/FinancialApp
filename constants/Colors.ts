@@ -20,7 +20,7 @@ export default {
   Button: {
     primary: '#2F9FF8',
     faded: 'rgba(47, 159, 248, 0.1)',
-    blue: '#00A3FF4D'
+    blue: '#063B66'
   },
   Text: {
     blue: '#2F9FF8',

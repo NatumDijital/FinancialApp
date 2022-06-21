@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 
-export default function FlatListPart({ item }) {
+
+export default function FlatListContainer({ item }) {
+    const updateData = () => {
+        item.isSelected = !item.isSelected;
+    }
     return (
-        <Pressable style={({ }) => item.isSelected ? [styles.flatListButtons, styles.pressed] : styles.flatListButtons}
-            onPress={() => item.isSelected = !item.isSelected} >
-            <Text style={styles.buttonText}>{item.title}</Text>
+        <Pressable style={[styles.flatListButtons, item.isSelected ? styles.pressed : []]}
+            onPress={updateData} >
+            <Text style={[styles.buttonText, item.isSelected ? styles.white : {}]}>{item.title}</Text>
         </Pressable>
     );
 };
@@ -21,11 +26,14 @@ const styles = StyleSheet.create({
         borderWidth: 0.2,
         backgroundColor: Colors.Text.white,
         padding: 10,
-        margin: 10,
+        margin: 15,
     },
     buttonText: {
         textAlign: 'center',
         fontWeight: '400',
-        fontSize: 20
+        fontSize: 20,
     },
+    white: {
+        color: 'white',
+    }
 })
