@@ -1,12 +1,17 @@
 import { EvilIcons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Image, StyleSheet, TouchableHighlight } from "react-native";
 import Colors from "../../constants/Colors";
 import { Text, View } from "../Themed";
 
 
-export default function NewsPage({ item }) {
+export default function NewsPage({ item }: any) {
+    const navigation = useNavigation();
+    function pressHandler() {
+        navigation.navigate('News', { data: item });
+    }
     return (
-        <TouchableHighlight
+        <TouchableHighlight onPress={pressHandler}
             key={item.key}>
             <View style={style.container}>
                 <View style={style.leftContainer}>

@@ -20,6 +20,7 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 import SettingsScreen from '../screens/SettingScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
+import NewsScreen from '../screens/NewsScreen';
 
 const MyTheme = {
   dark: true,
@@ -48,8 +49,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} /> */}
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name='News' component={NewsScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -66,7 +68,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  
+
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
