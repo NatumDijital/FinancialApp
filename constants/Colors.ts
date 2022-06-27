@@ -24,7 +24,9 @@ export default {
   },
   Text: {
     blue: '#2F9FF8',
-    white: '#FFFFFF'
+    white: '#FFFFFF',
+    orange: '#FF7426',
+    black: '#072D4B'
   },
   Icon: {
     darkBlue: '#0F33CD'
