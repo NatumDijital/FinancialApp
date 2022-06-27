@@ -19,7 +19,8 @@ export default {
   background: '#081026',
   Button: {
     primary: '#2F9FF8',
-    faded: 'rgba(47, 159, 248, 0.1)'
+    faded: 'rgba(47, 159, 248, 0.1)',
+    blue: '#063B66'
   },
   Text: {
     blue: '#2F9FF8',
@@ -37,5 +38,5 @@ export default {
   },
   updatebutton: {
     blue: '#0768B5'
-  }
+  },
 };
