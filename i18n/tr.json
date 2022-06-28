@@ -1,0 +1,11 @@
+{
+    "EDIT_PROFILE": {
+        "USERNAME": "Soyad",
+        "EMAIL": "Email",
+        "PHONE_NUMBER": "Telefon Numarasi",
+        "USER_ID": "Kullanici Kimliği",
+        "UPDATE_PROFILE": "Profili Güncelle",
+        "CHANGE_PICTURE": "Fotoğraf Değiştir",
+        "EDIT_PROFILE": "Profili Güncelle"
+    }
+}

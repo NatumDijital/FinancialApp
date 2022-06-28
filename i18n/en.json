@@ -1,0 +1,11 @@
+{
+    "EDIT_PROFILE": {
+        "USERNAME": "Username",
+        "EMAIL": "Email",
+        "PHONE_NUMBER": "Phone Number",
+        "USER_ID": "User ID",
+        "UPDATE_PROFILE": "Update Profile",
+        "CHANGE_PICTURE": "Change Picture",
+        "EDIT_PROFILE": "Edit Profile",
+    },
+}
