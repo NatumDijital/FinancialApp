@@ -4,16 +4,19 @@ import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-c
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import * as RNLocalize from "react-native-localize";
-import { I18nManager } from 'react-native';
+import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
-const memoize = require('memoize');
+import en from './i18n/en.json';
+
+i18n.translations = {
+  en: en,
+};
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  
-  setI18nConfig();
   
   if (!isLoadingComplete) {
     return null;
@@ -30,36 +33,3 @@ export default function App() {
     );
   }
 }
-
-const translationGetters = {
-  en: () => require("./i18n/en.json"),
-  tr: () => require("./i18n/tr.json"),
-};
-
-const translate = memoize(
-  (key, config) => i18n.t(key, config),
-  (key, config) => (config ? key + JSON.stringify(config) : key),
-);
-
-
-const setI18nConfig = () => {
-
-  // fallback if no available language fits
-  const fallback = { languageTag: "en", isRTL: false };
-
-  const { languageTag, isRTL } =
-    RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) ||
-    fallback;
-
-  // clear translation cache
-  translate.cache.clear();
-  // update layout direction
-  I18nManager.forceRTL(isRTL);
-
-  // set i18n-js config
-  i18n.translations = {
-    [languageTag]: translationGetters[languageTag](),
-  };
-
-  i18n.locale = languageTag;
-};
