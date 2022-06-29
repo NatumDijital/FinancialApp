@@ -4,37 +4,35 @@ import { useState } from "react";
 
 import Colors from "../../constants/Colors";
 import styles from "../../constants/styles";
+import I18n from "i18n-js";
 
 export default function ThirdOnBoardingPage() {
     const [selected, setSelected] = useState(false);
-    const boldText = 'You\'re almost done.'
-    const middleText = 'We categorize all the major events, your interest areas and your stocks carefully to let you know the ones that interest you most.'
-    const bottomText = 'Do you want to turn on notifications?'
     return (
         <View style={[styles.page, styles.opacityBackground, thirdPageStyle.container]}>
             <View style={styles.skipContainer}>
-                <Text style={styles.skipText}>Skip</Text>
+                <Text style={styles.skipText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.SKIP')}</Text>
             </View>
             <View style={thirdPageStyle.headerContainer}>
-                <Text style={[styles.boldText, thirdPageStyle.topText]} >{boldText}</Text>
-                <Text style={[styles.text, thirdPageStyle.middleText]}>{middleText}</Text>
-                <Text style={thirdPageStyle.bottomText}>{bottomText}</Text>
+                <Text style={[styles.boldText, thirdPageStyle.topText]} >{I18n.t('ONBOARDING.THIRD_ONBOARDING.ALMOST')}</Text>
+                <Text style={[styles.text, thirdPageStyle.middleText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.CATEGORIZE')}</Text>
+                <Text style={thirdPageStyle.bottomText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.NOTIFICATION')}</Text>
             </View>
             <View style={thirdPageStyle.buttonContainer}>
 
                 <Pressable style={({ pressed }) => pressed ? [thirdPageStyle.button, styles.pressed] : thirdPageStyle.button} onPress={() => setSelected(true)} >
-                    <Text style={styles.buttonText}>Yes</Text>
+                    <Text style={styles.buttonText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.YES')}</Text>
                 </Pressable>
                 <Pressable style={thirdPageStyle.button}>
-                    <Text style={styles.buttonText}>No</Text>
+                    <Text style={styles.buttonText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.NO')}</Text>
                 </Pressable>
             </View>
 
             {(selected ?
                 <View style={thirdPageStyle.conditionalContainer}>
-                    <Text style={styles.boldText}>You are all set.</Text>
+                    <Text style={styles.boldText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.ALL_SET')}.</Text>
                     <TouchableOpacity style={thirdPageStyle.startButton}>
-                        <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>START NOW!</Text>
+                        <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.START')}</Text>
                     </TouchableOpacity>
                 </View> : null)}
 

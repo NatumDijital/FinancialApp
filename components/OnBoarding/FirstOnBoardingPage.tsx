@@ -2,15 +2,15 @@ import { View, Text } from "../Themed";
 import { StyleSheet } from "react-native";
 
 import styles from "../../constants/styles";
+import I18n from "i18n-js";
+
 
 export default function FirstOnBoardingPage() {
-    const boldText = 'Everthing you need to invest.'
-    const text = 'A finance news experience that is noiseless, focused and far from the chaos of social media and classical news.'
     return (
         <View style={[styles.page, firstPageStyle.container]}>
             <View style={firstPageStyle.textArea}>
-                <Text style={styles.boldText}>{boldText}</Text>
-                <Text style={[styles.text, firstPageStyle.bottomText]}>{text}</Text>
+                <Text style={styles.boldText}>{I18n.t('ONBOARDING.FIRST_ONBOARDING.TITLE')}</Text>
+                <Text style={[styles.text, firstPageStyle.bottomText]}>{I18n.t('ONBOARDING.FIRST_ONBOARDING.MESSAGE')}</Text>
             </View>
         </View>
     )
