@@ -1,4 +1,5 @@
 import { EvilIcons } from '@expo/vector-icons';
+import I18n from 'i18n-js';
 import { Button, Dimensions, StyleSheet, TouchableHighlight } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -9,22 +10,20 @@ import Colors from '../constants/Colors';
 import { RootTabScreenProps } from '../types';
 
 function MorningTitle() {
-  const morningText = "Good morning Bro!";
   return (
     <View style={styles.morningContainer}>
       <View style={styles.morningDot}></View>
       {/* <EvilIcons name='user' color={Colors.Text.blue} size={25}></EvilIcons> */}
-      <Text style={styles.morningText}>{morningText}</Text>
+      <Text style={styles.morningText}>{I18n.t('HOME.MORNING')}</Text>
     </View>
   );
 }
 
 function SearchButton() {
-  const searchText = "#Search";
   return (
     <View style={styles.searchContainer}>
       <EvilIcons name="search" color={'white'} size={25}></EvilIcons>
-      <Text style={styles.searchText}>{searchText}</Text>
+      <Text style={styles.searchText}>{I18n.t('HOME.SEARCH')}</Text>
     </View>
   );
 }

@@ -7,12 +7,9 @@ import Colors from "../../constants/Colors";
 import styles from "../../constants/styles";
 import StockModel from "../../constants/Stocks";
 import FlatListContainer from "./FlatList";
+import I18n from "i18n-js";
 
 export default function SecondOnBoardingPage({ data }: { data: StockModel[] }) {
-    const skip = 'Skip'
-    const boldText = 'Which stocks are you interested in?'
-    const text = 'Select all that apply. If you cant find your stock please search at below.'
-    const findText = 'Can\'t find\?'
 
     let [filteredData, setFilteredData] = useState(data);
 
@@ -29,11 +26,11 @@ export default function SecondOnBoardingPage({ data }: { data: StockModel[] }) {
     return (
         <View style={[styles.page, styles.opacityBackground, secondPageStyle.container]}>
             <View style={styles.skipContainer}>
-                <Text style={styles.skipText}>{skip}</Text>
+                <Text style={styles.skipText}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.SKIP')}</Text>
             </View>
             <View style={secondPageStyle.headerContainer} >
-                <Text style={styles.boldText}>{boldText}</Text>
-                <Text style={[styles.text, secondPageStyle.headerBottomText]}>{text}</Text>
+                <Text style={styles.boldText}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.WHICH')}</Text>
+                <Text style={[styles.text, secondPageStyle.headerBottomText]}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.SELECT')}</Text>
             </View>
             <View style={secondPageStyle.flatListContainer}>
                 <FlatList
@@ -47,7 +44,7 @@ export default function SecondOnBoardingPage({ data }: { data: StockModel[] }) {
                 />
             </View>
             <View style={secondPageStyle.bottomContainer}>
-                <Text style={[styles.text, secondPageStyle.bottomText]}>{findText}</Text>
+                <Text style={[styles.text, secondPageStyle.bottomText]}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.FIND')}</Text>
                 <View style={secondPageStyle.textInputArea}>
                     <TextInput placeholder='Search stocks' placeholderTextColor='#949494' style={secondPageStyle.textInput} onChangeText={onTextChanged} />
                     <Feather name="search" size={24} color="white" />

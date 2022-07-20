@@ -1,0 +1,78 @@
+{
+    "HOME": {
+        "MORNING": "Good morning Bro!",
+        "SEARCH": "#Search"
+    },
+    "MODAL": {
+        "MODAL": "Modal"
+    },
+    "NEWS": {
+        "PREVIOUS": "Previous Article",
+        "NEXT": "Next Article",
+        "FREE": "You have 2 free news left this month.",
+        "PREMIUM": "Subscribe to Premium",
+        "UPGRADE": "Upgrade"
+    },
+    "NOT_FOUND": {
+        "TITLE": "This screen doesn't exist.",
+        "LINK": "Go to home screen!"
+    },
+    "ONBOARDING": {
+        "FIRST_ONBOARDING": {
+            "TITLE": "Everthing you need to invest.",
+            "MESSAGE": "A finance news experience that is noiseless, focused and far from the chaos of social media and classical news."
+        },
+        "SECOND_ONBOARDING": {
+            "SKIP": "Skip",
+            "WHICH": "Which stocks are you interested in?",
+            "SELECT": "Select all that apply. If you cant find your stock please search at below.",
+            "FIND": "Can't find?"
+        },
+        "THIRD_ONBOARDING": {
+            "SKIP": "Skip",
+            "ALMOST": "You're almost done.",
+            "CATEGORIZE": "We categorize all the major events, your interest areas and your stocks carefully to let you know the ones that interest you most.",
+            "NOTIFICATION": "Do you want to turn on notifications?",
+            "YES": "Yes",
+            "NO": "No",
+            "ALL_SET": "You are all set.",
+            "START": "START NOW!"
+        }
+    },
+    "SETTINGS": {
+        "MAIN": {
+            "SETTINGS": "Settings",
+            "NAME": "Yigit Celik",
+            "SIGN_UP": "Sign Up and don't lose your account data.",
+            "APP": "App Settings",
+            "PUSH": "Push Notifications",
+            "BRIEF": "Daily Brief",
+            "BRIEF_TIME": "Daily Brief Time",
+            "TIME": "09:00 AM",
+            "OTHERS": "Others",
+            "ABOUT": "About us",
+            "POLICY": "Privacy Policy",
+            "TERMS": "Terms and Conditions"
+        },
+        "EDIT_PROFILE": {
+            "EDIT": "Edit Profile",
+            "CHANGE": "Change Picture",
+            "USERNAME": "Username",
+            "EMAIL": "Email",
+            "PHONE": "Phone Number",
+            "ID": "User ID",
+            "UPDATE": "Update Profile"
+        }
+    },
+    "TAB_TWO": {
+        "TAB_TWO": {
+            "TAB": "Tab Two"
+        },
+        "EDIT_INFO": {
+            "OPEN": "Open up the code for this screen:",
+            "CHANGE": "Change any of the text, save the file, and your app will automatically update.",
+            "TAP": "Tap here if your app doesn't automatically update after making changes"
+        }
+
+    }
+}

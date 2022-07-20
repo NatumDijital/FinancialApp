@@ -5,6 +5,7 @@ import { News } from '../models/NewsModel';
 import { RootStackParamList } from '../types';
 import { AntDesign, Feather, EvilIcons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
+import I18n from "i18n-js";
 
 export default function NewsScreen() {
     const data: News = {
@@ -52,20 +53,20 @@ export default function NewsScreen() {
             <View>{data.detailedMessage}</View> */}
             <View style={styles.headerContainer}>
                 <TouchableOpacity>
-                    <Text style={styles.headerText}><AntDesign name="left"></AntDesign>Previous Article</Text>
+                    <Text style={styles.headerText}><AntDesign name="left"></AntDesign>{I18n.t('NEWS.PREVIOUS')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Text style={styles.headerText}>Next Article<AntDesign name="right"></AntDesign></Text>
+                    <Text style={styles.headerText}>{I18n.t('NEWS.NEXT')}<AntDesign name="right"></AntDesign></Text>
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style={styles.leftMessage}>You have 2 free news left this month.</Text>
+                <Text style={styles.leftMessage}>{I18n.t('NEWS.FREE')}</Text>
             </View>
             <View style={styles.subscribeContainer}>
                 <Feather name='gift' size={22} color={Colors.Text.white} />
-                <Text style={styles.subscribeText}>Subscribe to Premium</Text>
+                <Text style={styles.subscribeText}>{I18n.t('NEWS.PREMIUM')}</Text>
                 <Pressable style={styles.upgradeButton}>
-                    <Text style={styles.subscribeText}>Updgrade</Text>
+                    <Text style={styles.subscribeText}>{I18n.t('NEWS.UPGRADE')}</Text>
                 </Pressable>
             </View>
             <View>

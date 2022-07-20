@@ -1,8 +1,10 @@
 import { Pressable, Image, StyleSheet, Switch, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { View } from '../components/Themed';
-import Colors from '../constants/Colors';
 import { AntDesign } from "@expo/vector-icons";
+
+import Colors from '../constants/Colors';
+import I18n from "i18n-js";
 
 function SettingsEditProfile({ onBackButton }: any) {
 
@@ -12,25 +14,25 @@ function SettingsEditProfile({ onBackButton }: any) {
                 <TouchableOpacity>
                     <AntDesign name="left" onPress={onBackButton} style={styles.iconBackButton}></AntDesign>
                 </TouchableOpacity>
-                <Text style={styles.title}> Edit Profile </Text>
+                <Text style={styles.title}>{I18n.t('SETTINGS.EDIT_PROFILE.EDIT')}</Text>
             </View>
             <View style={styles.changePictureContainer}>
                 <Image source={require('../assets/images/elon.jpeg')} style={styles.changePictureImage}></Image>
-                <Text style={styles.changePictureText}>Change Picture</Text>
+                <Text style={styles.changePictureText}>{I18n.t('SETTINGS.EDIT_PROFILE.CHANGE')}</Text>
             </View>
             <View style={styles.TextInputContainer}>
-                <Text style={styles.subTitle}>Username</Text>
+                <Text style={styles.subTitle}>{I18n.t('SETTINGS.EDIT_PROFILE.USERNAME')}</Text>
                 <TextInput style={styles.textInputs}></TextInput>
-                <Text style={styles.subTitle}>Email</Text>
+                <Text style={styles.subTitle}>{I18n.t('SETTINGS.EDIT_PROFILE.EMAIL')}</Text>
                 <TextInput style={styles.textInputs}></TextInput>
-                <Text style={styles.subTitle}>Phone Number</Text>
+                <Text style={styles.subTitle}>{I18n.t('SETTINGS.EDIT_PROFILE.PHONE')}</Text>
                 <TextInput style={styles.textInputs}></TextInput>
-                <Text style={styles.subTitle}>User ID</Text>
+                <Text style={styles.subTitle}>{I18n.t('SETTINGS.EDIT_PROFILE.ID')}</Text>
                 <TextInput style={styles.textInputs}></TextInput>
             </View>
             <View style={styles.buttonContainer}>
                 <Pressable style={styles.upDateProfileButton}>
-                    <Text style={styles.buttonText}>Update Profile</Text>
+                    <Text style={styles.buttonText}>{I18n.t('SETTINGS.EDIT_PROFILE.UPDATE')}</Text>
                 </Pressable>
             </View>
 
@@ -43,50 +45,50 @@ function SettingsMainPage({ onPress }: any) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Settings</Text>
+            <Text style={styles.title}>{I18n.t('SETTINGS.MAIN.SETTINGS')}</Text>
             <View style={styles.profileNameContainer}>
                 <Image source={require('../assets/images/elon.jpeg')} style={styles.profileImage}></Image>
-                <Text style={styles.profileName}>Yigit Celik</Text>
+                <Text style={styles.profileName}>{I18n.t('SETTINGS.MAIN.NAME')}</Text>
                 <TouchableOpacity onPress={onPress}>
                     <Image source={require('../assets/images/edit-profile.png')} style={styles.editImage}></Image>
                 </TouchableOpacity>
             </View>
             <View style={styles.line}></View>
             <View style={styles.signUpContainer}>
-                <Text style={styles.signUpText}>Sign Up and don't lose your account data.</Text>
+                <Text style={styles.signUpText}>{I18n.t('SETTINGS.MAIN.SIGN_UP')}</Text>
                 <Image source={require('../assets/images/sign-in-with-Apple.png')} style={styles.signInWithAppleImage}></Image>
             </View>
             <View style={styles.line}></View>
             <View style={styles.appSettingsContainer}>
-                <Text style={styles.blueTitle}>App Settings</Text>
+                <Text style={styles.blueTitle}>{I18n.t('SETTINGS.MAIN.APP')}</Text>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>Push Notifications</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.PUSH')}</Text>
                     <Switch
                         thumbColor={Colors.switch.darkGrey}>
                     </Switch>
                 </View>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>Daily Brief</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.BRIEF')}</Text>
                     <Switch trackColor={{ false: "#202020", true: "#2F9FF8" }} />
                 </View>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>Daily Brief Time</Text>
-                    <Text style={styles.blueTitle}>09:00 AM</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.BRIEF_TIME')}</Text>
+                    <Text style={styles.blueTitle}>{I18n.t('SETTINGS.MAIN.TIME')}</Text>
                 </View>
             </View>
             <View style={styles.line}></View>
             <View style={styles.appSettingsContainer}>
-                <Text style={styles.blueTitle}>Others</Text>
+                <Text style={styles.blueTitle}>{I18n.t('SETTINGS.MAIN.OTHERS')}</Text>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>About Us</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.ABOUT')}</Text>
                     <Image source={require('../assets/images/greater-than-sign.png')} style={styles.editImage}></Image>
                 </View>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>Privacy Policy</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.POLICY')}</Text>
                     <Image source={require('../assets/images/greater-than-sign.png')} style={styles.editImage}></Image>
                 </View>
                 <View style={styles.horizontalContainer}>
-                    <Text style={styles.subTitle}>Terms and Conditions</Text>
+                    <Text style={styles.subTitle}>{I18n.t('SETTINGS.MAIN.TERMS')}</Text>
                     <Image source={require('../assets/images/greater-than-sign.png')} style={styles.editImage}></Image>
                 </View>
             </View>
