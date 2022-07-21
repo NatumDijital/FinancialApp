@@ -1,13 +1,33 @@
 import { View, Text } from "../Themed";
 import { Pressable, TouchableOpacity, TextInput, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Colors from "../../constants/Colors";
 import styles from "../../constants/styles";
 import I18n from "i18n-js";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ThirdOnBoardingPage() {
     const [selected, setSelected] = useState(false);
+    const [pressed, setPressed] = useState(false);
+
+    const navigation = useNavigation();
+
+    function onboardingExitHandler() {
+        if (selected || pressed) {
+            navigation.navigate('Root');
+        }
+    };
+
+    function pressHandler1() {
+        setSelected(true);
+        setPressed(false);
+    };
+    function pressHandler2() {
+        setPressed(true);
+        setSelected(false);
+    };
+
     return (
         <View style={[styles.page, styles.opacityBackground, thirdPageStyle.container]}>
             <View style={styles.skipContainer}>
@@ -19,23 +39,21 @@ export default function ThirdOnBoardingPage() {
                 <Text style={thirdPageStyle.bottomText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.NOTIFICATION')}</Text>
             </View>
             <View style={thirdPageStyle.buttonContainer}>
-
-                <Pressable style={({ pressed }) => pressed ? [thirdPageStyle.button, styles.pressed] : thirdPageStyle.button} onPress={() => setSelected(true)} >
-                    <Text style={styles.buttonText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.YES')}</Text>
+                <Pressable style={[thirdPageStyle.button, selected ? { backgroundColor: Colors.Button.blue } : null]} onPress={pressHandler1} >
+                    <Text style={[styles.buttonText, selected ? { color: Colors.Text.white } : null]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.YES')}</Text>
                 </Pressable>
-                <Pressable style={thirdPageStyle.button}>
-                    <Text style={styles.buttonText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.NO')}</Text>
+                <Pressable style={[thirdPageStyle.button, pressed ? { backgroundColor: Colors.Button.blue } : null]} onPress={pressHandler2}>
+                    <Text style={[styles.buttonText, pressed ? { color: Colors.Text.white } : null]} >{I18n.t('ONBOARDING.THIRD_ONBOARDING.NO')}</Text>
                 </Pressable>
             </View>
 
-            {(selected ?
-                <View style={thirdPageStyle.conditionalContainer}>
-                    <Text style={styles.boldText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.ALL_SET')}.</Text>
-                    <TouchableOpacity style={thirdPageStyle.startButton}>
-                        <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.START')}</Text>
-                    </TouchableOpacity>
-                </View> : null)}
 
+            <View style={[thirdPageStyle.conditionalContainer, selected || pressed ? { opacity: 1 } : { opacity: 0 }]}>
+                <Text style={styles.boldText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.ALL_SET')}.</Text>
+                <TouchableOpacity onPress={onboardingExitHandler} style={thirdPageStyle.startButton}>
+                    <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.START')}</Text>
+                </TouchableOpacity>
+            </View>
         </View>
 
     )
@@ -83,7 +101,7 @@ const thirdPageStyle = StyleSheet.create({
     conditionalContainer: {
         backgroundColor: 'transparent',
         alignItems: 'center',
-        marginTop: 45
+        marginTop: 45,
     },
     startButton: {
         height: 43,
@@ -96,7 +114,3 @@ const thirdPageStyle = StyleSheet.create({
         paddingTop: 10
     }
 });
-
-
-
-
