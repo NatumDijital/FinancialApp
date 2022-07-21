@@ -5,10 +5,10 @@
  */
 import { Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
 import { ColorSchemeName, View } from 'react-native';
+import { useEffect, useState } from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -21,6 +21,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import SettingsScreen from '../screens/SettingScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import NewsScreen from '../screens/NewsScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyTheme = {
   dark: true,
@@ -47,9 +48,29 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+
+  const [isAppOpenedBefore, setIsAppOpenedBefore] = useState(false)
+
+  useEffect(() => {
+    async function appData() {
+      const data = await AsyncStorage.getItem('isAppOpenedBefore');
+      console.log(data);
+      if (data) {
+        setIsAppOpenedBefore(true);
+      } else {
+        setIsAppOpenedBefore(false);
+        await AsyncStorage.setItem('isAppOpenedBefore', 'in');
+      }
+    }
+
+    appData();
+  }, [])
+
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} /> */}
+      {/* {!isAppOpenedBefore && ( */}
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+        {/* )} */}
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name='News' component={NewsScreen} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
