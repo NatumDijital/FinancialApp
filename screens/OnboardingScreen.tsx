@@ -8,47 +8,31 @@ import FirstOnBoardingPage from '../components/OnBoarding/FirstOnBoardingPage';
 import SecondOnBoardingPage from '../components/OnBoarding/SecondOnBoardingPage';
 import ThirdOnBoardingPage from '../components/OnBoarding/ThirdOnBoardingPage';
 
-import StockModel from '../constants/Stocks';
+import StockModel from '../models/StockModel';
 import styles from '../constants/styles';
+import StockService from '../services/stocks.service';
+import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { StockContext } from '../context/stockContext';
 
 
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 
 export default function OnboardingScreen({ navigation }: RootStackScreenProps<'Onboarding'>) {
-  const data: StockModel[] = [
-    {
-      title: 'APPL',
-      isSelected: false,
-    },
-    {
-      title: 'MSFT',
-      isSelected: false,
-    }, {
-      title: 'GOOG',
-      isSelected: false,
-    }, {
-      title: 'GOOGL',
-      isSelected: false,
-    }, {
-      title: 'TSLA',
-      isSelected: false,
-    }, {
-      title: 'META',
-      isSelected: false,
-    }, {
-      title: 'V',
-      isSelected: false,
-    }, {
-      title: 'JPM',
-      isSelected: false,
-    }, {
-      title: 'XOM',
-      isSelected: false,
-    }, {
-      title: 'WMT',
-      isSelected: false,
-    }
-  ]
+  
+  const data = useContext(StockContext);
+  
+  // const [data, setData] = useState<StockModel[]>([]);
+
+  // useEffect(() => { 
+  //   async function getStockData() {
+  //     const d = await StockService.getStockList();
+  //     setData(d);
+  //   };
+  //   getStockData();
+  // }, [])
+
+  
   return (
     <SafeAreaView style={styles.container}>
       <Image source={require('../assets/images/onboarding-background-image.png')} style={styles.backgroundImage} />
@@ -58,7 +42,9 @@ export default function OnboardingScreen({ navigation }: RootStackScreenProps<'O
         showPageIndicator={true}
       >
         <FirstOnBoardingPage key="1"></FirstOnBoardingPage>
-        <SecondOnBoardingPage key="2" data={data}></SecondOnBoardingPage>
+        
+        <SecondOnBoardingPage key="2" data={data.getData}></SecondOnBoardingPage>
+
         <ThirdOnBoardingPage key="3"></ThirdOnBoardingPage>
       </PagerView>
     </SafeAreaView>

@@ -5,10 +5,11 @@
  */
 import { Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ColorSchemeName, View } from 'react-native';
 import { useEffect, useState } from 'react';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -16,12 +17,13 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import SettingsScreen from '../screens/SettingScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import NewsScreen from '../screens/NewsScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import UserService from '../services/user.service';
+import LoadingScreen from '../screens/LoadingScreen';
+import StockService from '../services/stocks.service';
 
 const MyTheme = {
   dark: true,
@@ -49,31 +51,47 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
 
-  const [isAppOpenedBefore, setIsAppOpenedBefore] = useState(false)
+  useEffect(() => {
+   
+    UserService.init().then((value) => {
+      setIsAppReady(true);
+    });
+   StockService.getStockList();
+  }, [])
+
+  const [isAppOpenedBefore, setIsAppOpenedBefore] = useState(false);
+  const [isAppReady, setIsAppReady] = useState(false);
 
   useEffect(() => {
     async function appData() {
-      const data = await AsyncStorage.getItem('isAppOpenedBefore');
-      console.log(data);
-      if (data) {
-        setIsAppOpenedBefore(true);
-      } else {
-        setIsAppOpenedBefore(false);
-        await AsyncStorage.setItem('isAppOpenedBefore', 'in');
-      }
+      // const data = await AsyncStorage.getItem(storageKeys.isAppOpenedBefore);
+      // if (data) {
+      //   setIsAppOpenedBefore(true);
+      // } else {
+      //   setIsAppOpenedBefore(false);
+      //  await AsyncStorage.setItem(storageKeys.isAppOpenedBefore, 'in');
+      // }
     }
-
     appData();
-  }, [])
+  }, []);
+
+
 
   return (
     <Stack.Navigator>
-      {/* {!isAppOpenedBefore && ( */}
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
-        {/* )} */}
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name='News' component={NewsScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      {isAppReady ? (
+        <>
+          {!isAppOpenedBefore && (
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ headerShown: false }} />
+          )}
+          <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+          <Stack.Screen name='News' component={NewsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        </>
+      ) : (
+        <Stack.Screen name="Loading" component={LoadingScreen} options={{ headerShown: false }} ></Stack.Screen>
+      )}
+
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>

@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Pressable, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
+import { StockContext } from "../../context/stockContext";
+import StockModel from "../../models/StockModel";
 
 
-export default function FlatListContainer({ item }) {
-    const updateData = () => {
-        item.isSelected = !item.isSelected;
+export default function FlatListContainer({ item }: {item: StockModel}) {
+
+    const [i, setSelectedItem] = useState<boolean>(!!item?.isSelected);
+
+    const stocks = useContext(StockContext);
+
+    
+    const setSelected = () => {
+        setSelectedItem(!i);
+            stocks.setSelected(item._id);
     }
+  
+
     return (
-        <Pressable style={[styles.flatListButtons, item.isSelected ? styles.pressed : []]}
-            onPress={updateData} >
-            <Text style={[styles.buttonText, item.isSelected ? styles.white : {}]}>{item.title}</Text>
+        <Pressable style={[styles.flatListButtons, i ? styles.pressed : null]}
+            onPress={setSelected} >
+            <Text style={[styles.buttonText, i ? styles.white : null]}>{item.symbol}</Text>
         </Pressable>
     );
 };

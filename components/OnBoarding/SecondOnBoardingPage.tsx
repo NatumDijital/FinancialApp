@@ -1,28 +1,32 @@
 import { View, Text } from "../Themed";
 import { FlatList, TextInput, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Feather } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
 import styles from "../../constants/styles";
-import StockModel from "../../constants/Stocks";
+import StockModel from "../../models/StockModel";
 import FlatListContainer from "./FlatList";
 import I18n from "i18n-js";
+import { useEffect } from "react";
 
 export default function SecondOnBoardingPage({ data }: { data: StockModel[] }) {
 
-    let [filteredData, setFilteredData] = useState(data);
+    useEffect(() => {
+        setFilteredData(data);
+    }, [data]);
 
-
+    let [filteredData, setFilteredData] = useState<StockModel[]>(data);
 
     const onTextChanged = (key: string) => {
         if (key.length === 0) {
             setFilteredData(data);
         } else {
             setFilteredData([]);
-            setFilteredData(data.filter((val) => val?.title.toLowerCase().includes(key.toLowerCase())));
+            setFilteredData(data.filter((val) => val?.symbol.toLowerCase().includes(key.toLowerCase())));
         }
     }
+
     return (
         <View style={[styles.page, styles.opacityBackground, secondPageStyle.container]}>
             <View style={styles.skipContainer}>
@@ -32,14 +36,16 @@ export default function SecondOnBoardingPage({ data }: { data: StockModel[] }) {
                 <Text style={styles.boldText}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.WHICH')}</Text>
                 <Text style={[styles.text, secondPageStyle.headerBottomText]}>{I18n.t('ONBOARDING.SECOND_ONBOARDING.SELECT')}</Text>
             </View>
+            
             <View style={secondPageStyle.flatListContainer}>
                 <FlatList
                     initialNumToRender={10}
+                    maxToRenderPerBatch={50}
                     columnWrapperStyle={{ justifyContent: 'space-between' }}
                     numColumns={2}
                     data={filteredData}
                     renderItem={({ item }) => (
-                        <FlatListContainer item={item}></FlatListContainer>
+                        <FlatListContainer item={item} ></FlatListContainer>
                     )}
                 />
             </View>

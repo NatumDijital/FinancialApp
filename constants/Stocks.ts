@@ -1,4 +1,4 @@
-export default class StockModel {
-    title: string = "";
-    isSelected: boolean = false;
-}
+// export default class StockModel {
+//     title: string = "";
+//     isSelected: boolean = false;
+// }

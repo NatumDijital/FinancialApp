@@ -1,31 +1,56 @@
 import { View, Text } from "../Themed";
-import { Pressable, TouchableOpacity, TextInput, StyleSheet } from "react-native";
-import { useEffect, useState } from "react";
+import { Pressable, TouchableOpacity, TextInput, StyleSheet, Alert } from "react-native";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 
 import Colors from "../../constants/Colors";
 import styles from "../../constants/styles";
 import I18n from "i18n-js";
 import { useNavigation } from "@react-navigation/native";
+import { StockContext } from "../../context/stockContext";
+import * as Progress from 'react-native-progress';
+
+
 
 export default function ThirdOnBoardingPage() {
     const [selected, setSelected] = useState(false);
     const [pressed, setPressed] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const stocks = useContext(StockContext);
 
     const navigation = useNavigation();
-
-    function onboardingExitHandler() {
-        if (selected || pressed) {
-            navigation.navigate('Root');
+    useEffect(() => {
+        try {
+            if (loading) {
+                navigation.navigate('Root');
+            } else {
+                return;
+            }
+        } catch (error) {
+            console.log(error);
         }
+    }, [loading])
+
+    async function onboardingExitHandler() {
+        setLoading(true);
+        const updateStocks = await stocks.updateUserStocks();
     };
 
-    function pressHandler1() {
+
+
+
+    function turnOnNotification() {
         setSelected(true);
         setPressed(false);
     };
-    function pressHandler2() {
-        setPressed(true);
-        setSelected(false);
+
+    function turnOffNotification() {
+        try {
+            setPressed(true);
+            setSelected(false);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -39,10 +64,10 @@ export default function ThirdOnBoardingPage() {
                 <Text style={thirdPageStyle.bottomText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.NOTIFICATION')}</Text>
             </View>
             <View style={thirdPageStyle.buttonContainer}>
-                <Pressable style={[thirdPageStyle.button, selected ? { backgroundColor: Colors.Button.blue } : null]} onPress={pressHandler1} >
+                <Pressable style={[thirdPageStyle.button, selected ? { backgroundColor: Colors.Button.blue } : null]} onPress={turnOnNotification} >
                     <Text style={[styles.buttonText, selected ? { color: Colors.Text.white } : null]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.YES')}</Text>
                 </Pressable>
-                <Pressable style={[thirdPageStyle.button, pressed ? { backgroundColor: Colors.Button.blue } : null]} onPress={pressHandler2}>
+                <Pressable style={[thirdPageStyle.button, pressed ? { backgroundColor: Colors.Button.blue } : null]} onPress={turnOffNotification}>
                     <Text style={[styles.buttonText, pressed ? { color: Colors.Text.white } : null]} >{I18n.t('ONBOARDING.THIRD_ONBOARDING.NO')}</Text>
                 </Pressable>
             </View>
@@ -51,7 +76,11 @@ export default function ThirdOnBoardingPage() {
             <View style={[thirdPageStyle.conditionalContainer, selected || pressed ? { opacity: 1 } : { opacity: 0 }]}>
                 <Text style={styles.boldText}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.ALL_SET')}.</Text>
                 <TouchableOpacity onPress={onboardingExitHandler} style={thirdPageStyle.startButton}>
-                    <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.START')}</Text>
+                    {loading ? (
+                        <Progress.Circle size={25} indeterminate={true} style={thirdPageStyle.loading} />
+                    ) : (
+                        <Text style={[styles.buttonText, thirdPageStyle.buttonText]}>{I18n.t('ONBOARDING.THIRD_ONBOARDING.START')}</Text>
+                    )}
                 </TouchableOpacity>
             </View>
         </View>
@@ -107,10 +136,13 @@ const thirdPageStyle = StyleSheet.create({
         height: 43,
         width: '80%',
         backgroundColor: Colors.Button.blue,
-        margin: 40
+        margin: 40,
+        justifyContent: 'center'
     },
     buttonText: {
         color: Colors.Text.white,
-        paddingTop: 10
+    },
+    loading: {
+        alignItems: 'center',
     }
 });

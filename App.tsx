@@ -7,6 +7,7 @@ import Navigation from './navigation';
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 import en from './i18n/en.json';
+import { StockProvider } from './context/stockContext';
 
 i18n.translations = {
   en: en,
@@ -17,18 +18,20 @@ i18n.fallbacks = true;
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <StatusBar 
-          translucent={true} 
+        <StatusBar
+          translucent={true}
           backgroundColor="#fff"
           style='light'
         />
-        <Navigation colorScheme={colorScheme} />
+        <StockProvider>
+          <Navigation colorScheme={colorScheme} />
+        </StockProvider>
       </SafeAreaProvider>
     );
   }
