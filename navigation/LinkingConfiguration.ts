@@ -36,6 +36,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       NotFound: '*',
       Onboarding: 'onboarding',
       News: 'news',
+      Loading: 'loading',
     },
   },
 };

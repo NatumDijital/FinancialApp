@@ -19,6 +19,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   Onboarding: undefined;
+  Loading: undefined;
   News: { data: News };
 };
 
